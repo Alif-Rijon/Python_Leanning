@@ -6,3 +6,4 @@ for multuple line comment use three cotation
 print("hello tripty \t rijon")
 print("\"Hello\"")
 #test github
+print("hello try github")
