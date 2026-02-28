@@ -38,7 +38,7 @@ b = "Hello world!"
 print(b[2:5]) #last index excluded
 print(b[:5])
 print(b[2:])
-print(b[-5:-2]) #start from last and -5 excluded and ended to -2 from last
+print(b[-5:-2]) #start from last and count start with 1 and last index will be excluded
 print("----")
 print(b[-5:])  
 print(b[:-2])
