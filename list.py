@@ -17,10 +17,10 @@ fruits = ['apple', 'banana', 'cherry']
 fruits.insert(1, "orange")
 print(fruits)
 
-fruits.pop(0)
+fruits.pop(0) #pop specified with index
 print(fruits)
 
-fruits.remove("banana")
+fruits.remove("banana") #remove specified with item
 print(fruits)
 
 fruits.reverse()
@@ -42,10 +42,28 @@ if 66 in number3:
 
 new = ['hello','now',5,87]
 new[1:3]=['changed',44]  #there also be 3 excluded
+new.append(5)
 print(new)
-
-for x in new:
-    print(x)
+print(type(new))
 
 for i in range(len(new)):
+    print("New list:", new[i])
+
+c=list(range(0,50,3))
+print(c)
+d=list(range(100,0,-2))
+print(d)
+
+a=[]
+a.append(5)
+a.insert(0,33)
+b=[55]
+a.extend(b)
+print(a)
+for i in a:
     print(i)
+
+i=0
+while(i<len(a)):
+    print("While loop ",i ,":",a[i])
+    i=i+1
