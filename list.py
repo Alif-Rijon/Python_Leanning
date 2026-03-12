@@ -12,6 +12,7 @@ print(b)
 number1=["rijon",5,3,9,44]
 c=number1.insert(2,"tijo")
 print(c) # it returns none because insert() function return none 
+print(number1)
 
 fruits = ['apple', 'banana', 'cherry']
 fruits.insert(1, "orange")
@@ -42,6 +43,8 @@ if 66 in number3:
 
 new = ['hello','now',5,87]
 new[1:3]=['changed',44]  #there also be 3 excluded
+
+
 new.append(5)
 print(new)
 print(type(new))
@@ -54,9 +57,11 @@ print(c)
 d=list(range(100,0,-2))
 print(d)
 
+print("-------")
 a=[]
 a.append(5)
 a.insert(0,33)
+print("----------")
 b=[55]
 a.extend(b)
 print(a)

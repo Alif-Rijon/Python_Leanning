@@ -35,3 +35,24 @@ for i,j in mydict.items():
     print(i,":",j)
 
 #Nested dictionary
+
+myFamily ={
+    "child1":{
+        "name":"Rijon",
+        "age": 20
+    },
+    "child2":{
+        "name":"Alif",
+        "age":22
+
+    }
+}
+print(f"this is nested dict test where keys are{myFamily.keys()} and values are {myFamily.values()}")
+print(myFamily)
+print(myFamily.items())
+print(myFamily.keys())
+print(myFamily.values())
+print(len(myFamily))
+
+for i in myFamily:
+    print(myFamily[i])
