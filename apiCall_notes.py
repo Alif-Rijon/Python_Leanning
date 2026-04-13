@@ -134,6 +134,7 @@ extra rules/information about my request
 | Used for | filter, search, pagination | auth, format, client info  |
 
 """
+print("======")
 # ex:
 headers ={
     "Accept":"application/json"
@@ -142,6 +143,8 @@ headers ={
 r = requests.get("https://api.github.com",headers=headers)
 print(r.url)  # headers not show in url 
 print(r.status_code)
+print("--------")
+print(r.cookies)
 
 # 'Post' request 
 '''
@@ -162,6 +165,7 @@ print(r.text)
 
 data = r.json()
 print("URL:",data["url"])
+print(data["form"])
 
 print("========")
 
@@ -174,3 +178,147 @@ try:
     print(data)
 except requests.exceptions.RequestException as e:
     print("Error:", e)
+
+# Cookie = a small data value stored by browser/client so the server can remember state between requests.
+
+# Important note
+
+# A cookie usually does not store your full password.
+
+# Usually it stores something like:
+
+# session ID
+
+# token-like identifier
+
+# small preference values
+""" 
+--->>When should you use Session?
+
+Use session when:
+
+you call the same API many times
+
+you need login persistence
+
+you want common headers/auth
+
+you want cleaner code
+
+Do not worry about using it for every tiny script.
+For beginner practice, requests.get() is fine.
+For slightly better scripts, Session() is better.
+
+Very easy memory line
+
+requests.get() = one request
+Session() = one reusable requester for many requests
+ """
+import requests
+
+s= requests.Session()  #By using Session we do not need write repeatedly requests
+s.headers.update({"Accept":"application/json"})
+
+r1=s.get("https://api.github.com")
+r2=s.get("https://api.github.com/users")
+r3=s.get("https://api.github.com/events")
+""" 
+What is authentication?
+
+Authentication means:
+
+proving to the server who you are
+
+So the server may ask:
+
+Who are you?
+
+Are you allowed?
+
+Show your token/password/key
+
+That checking process is authentication.
+
+---Authentication
+
+Who are you?
+
+---Authorization
+
+What are you allowed to do?
+
+Easy example:
+
+login with password = authentication
+
+allowed to open admin page = authorization
+
+Possible error codes:
+
+401 = unauthorized
+
+403 = forbidden
+ """
+#Modern APIs
+
+import requests
+
+headers={
+    "Authorization":"Bearer mytesttoken123"
+}
+
+r=requests.get("https://httpbin.org/headers",headers=headers)
+print(r.status_code)
+
+#Basic authentication
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+#r=requests.get("https://example.com/protected",auth=HTTPBasicAuth("myusername","mypassword"))
+
+#print(r.status_code)
+
+"""
+Final short notebook note:
+DAY 19: JSON
+- JSON is used for storing and exchanging data
+- import json
+- dumps() = Python to JSON string
+- loads() = JSON string to Python
+- dump() = Python to JSON file
+- load() = JSON file to Python
+
+DAY 20: API
+- API lets one program talk to another
+- import requests
+- requests.get(url) sends GET request
+- r.status_code checks success/failure
+- r.text gives response as text
+- r.json() converts JSON response to Python
+- always use timeout and check status code
+"""
+
+#Complete example (json + api)
+import requests
+import json
+
+url="https://api.github.com"
+
+try:
+    response=requests.get(url,timeout=5)
+
+    if response.status_code==200:
+        data=response.json()
+
+        print("Python data type:",type(data))
+        print("Current user URL:",data["current_user_url"])
+
+        with open("github_api_data.json","w") as file:
+            json.dump(data ,file,indent =4)
+
+        print("Data saved to github_api_data.json")
+    else:
+        print("Failed with status code:",response.status_code)
+except requests.exceptions.RequestException as e:
+    print("Request error:",e)
